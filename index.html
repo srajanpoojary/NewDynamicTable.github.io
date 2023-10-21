@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Table</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 50%;
+            margin-bottom: 10px;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #0b96ed;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        button {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        body {
+            background-image: url('https://img.freepik.com/free-photo/colorful-abstract-textured-background-design_53876-108265.jpg?w=996&t=st=1697907464~exp=1697908064~hmac=51e253b9b753ac5a76393270f12c5f83556a1624a0b07dce2ce34ca01406aceb');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .table-container {
+            background-color: rgba(104, 177, 233, 0.916); 
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+        }
+    </style>
+</head>
+<body>
+<div class="table-container">
+    <h1>Dynamic Table</h1>
+    <button onclick="addRow()">Add Row</button>
+    <button onclick="removeRow()">Remove Row</button>
+    <table id="dynamic-table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Initial row -->
+        <tr>
+            <td><input type="text" name="name[]"/></td>
+            <td><input type="number" name="age[]"/></td>
+            <td><button onclick="deleteRow(this)">Delete</button></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+    function addRow() {
+        var table = document.getElementById("dynamic-table").getElementsByTagName('tbody')[0];
+        var newRow = table.insertRow(table.rows.length);
+        var nameCell = newRow.insertCell(0);
+        var ageCell = newRow.insertCell(1);
+        var actionCell = newRow.insertCell(2);
+
+        nameCell.innerHTML = '<input type="text" name="name[]"/>';
+        ageCell.innerHTML = '<input type="number" name="age[]"/>';
+        actionCell.innerHTML = '<button onclick="deleteRow(this)">Delete</button>';
+    }
+
+    function deleteRow(button) {
+        var row = button.parentNode.parentNode;
+        var table = row.parentNode;
+        table.deleteRow(row.rowIndex);
+    }
+
+    function removeRow() {
+        var table = document.getElementById("dynamic-table").getElementsByTagName('tbody')[0];
+        if (table.rows.length > 1) {
+            table.deleteRow(table.rows.length - 1);
+        }
+    }
+</script>
+</body>
+</html>
